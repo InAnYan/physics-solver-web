@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Solution
+{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+
+        {% if problem_text %}
+            <label for="text-area" class="form-label">Problem text:</label>
+            <textarea class="form-control" id="text-area" rows="3" name="text"
+                      readonly>{{ problem_text }}</textarea>
+        {% endif %}
+
+        {% if solution %}
+            {% if problem %}
+                <label class="form-label">Found problem:</label>
+                <p>{{ problem }}</p>
+            {% endif %}
+
+            {% if displacy_ents %}
+
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseEnts" role="button"
+                   aria-expanded="false" aria-controls="collapseEnts">
+                    Show displaCy entities
+                </a>
+
+                <div class="collapse" id="collapseEnts">
+                    <div class="card card-body">
+                        {{ displacy_ents | safe }}
+                    </div>
+                </div>
+
+            {% endif %}
+
+            <h1>Solution:</h1>
+
+            <p>{{ solution }}</p>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForIncorrect">
+                Report incorrectly solved problem
+            </button>
+
+            <div class="modal fade" id="modalForIncorrect" tabindex="-1" aria-labelledby="modalForIncorrectLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalForIncorrectLabel">Report incorrectly solved
+                                problem</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="text-area" class="form-label">Comments (optional):</label>
+                            <textarea class="form-control" id="text-area" rows="3" name="comment"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" value="incorrect">Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% else %}
+            <p>The program was unable to solve this problem.</p>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForUnsolved">
+                Report unsolved problem
+            </button>
+
+            <div class="modal fade" id="modalForUnsolved" tabindex="-1" aria-labelledby="modalForUnsolvedLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalForUnsolvedLabel">Report unsolved problem</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="text-area" class="form-label">Comments (optional):</label>
+                            <textarea class="form-control" id="text-area" rows="3" name="comment"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" value="unsolved">Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </form>
+
+    <a class="btn btn-primary" href="/" role="button">Back to index</a>
+
+{% endblock %}
