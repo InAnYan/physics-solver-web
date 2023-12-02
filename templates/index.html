@@ -6,30 +6,40 @@
 
 {% block content %}
 
-    <h1>Physics basic problem solver</h1>
+    <div class="vstack gap-2">
+        <h2 class="text-center">Natural language input</h2>
 
-    <h2>Natural language input</h2>
+        <form action="solution">
 
-    <form action="solution">
+            <div class="vstack gap-2">
 
-        <label for="text-area" class="form-label">Problem text:</label>
-        <textarea class="form-control" id="text-area" rows="3" name="text"></textarea>
+                <label for="text-area" class="form-label">Problem text:</label>
+                <textarea class="form-control" id="text-area" rows="3" name="text"></textarea>
 
-        <button type="submit" class="btn btn-primary">Solve</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Solve</button>
+                </div>
 
-    </form>
+            </div>
 
-    <h2>Try these examples:</h2>
-    <p>some examples...</p>
+        </form>
 
-    <h2>How this works:</h2>
-    <p>some text....</p>
+        <h2>Try these examples:</h2>
+        <ul>
+            {% for example in examples %}
+                <li>{{ example.text }}</li>
+            {% endfor %}
+        </ul>
 
-    <p>Author: Ruslan Popov (InAnYan)</p>
-    <p>GitHub repository: <a href="https://github.com">link</a></p>
-
-    <p>Made for <a href="http://isc.ontu.edu.ua/">Black Sea Science 2024</a></p>
-
-    <a class="btn btn-primary" href="feedback-improvement" role="button">Feedback improvement</a>
+        <h2>How this works:</h2>
+        <ul>
+            <li>At first the text is pre-processed and named entities are recognized.</li>
+            <li>Then, the program tries to determine the type of the question.</li>
+            <li>If the program guessed the type, an intermediate representation is constructed.</li>
+            <li>Then, different algorithms are applied to solve the problem.</li>
+            <li>Finally, the solution is presented to the user.</li>
+        </ul>
+        <p>More details are available in paper: <a href="https://google.com">PAPER TODO</a>.</p>
+    </div>
 
 {% endblock %}
