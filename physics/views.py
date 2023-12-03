@@ -17,7 +17,6 @@ def solution(request):
     text = request.GET.get('text')
     context = {'problem_text': text}
 
-    """
     try:
         (problem, doc) = parse_english_problem(text)
         solution = problem.solve()
@@ -25,7 +24,6 @@ def solution(request):
         context['displacy_ents'] = displacy.render(doc, style='ent')
     except ParseError | SolverError:
         pass
-    """
 
     return render(request, 'solution.html', context)
 

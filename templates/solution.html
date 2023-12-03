@@ -15,26 +15,25 @@
                           readonly>{{ problem_text }}</textarea>
             {% endif %}
 
-            {% if solution %}
-                {% if problem %}
-                    <label class="form-label">Found problem:</label>
-                    <p>{{ problem }}</p>
-                {% endif %}
+            {% if problem %}
+                <label class="form-label">Found problem:</label>
+                <p>{{ problem }}</p>
+            {% endif %}
 
-                {% if displacy_ents %}
-                    <a class="btn btn-success col-md-3" data-bs-toggle="collapse" href="#collapseEnts" role="button"
-                       aria-expanded="false" aria-controls="collapseEnts">
-                        Show recognized entities
-                    </a>
+            {% if displacy_ents %}
+                <a class="btn btn-success col-md-3" data-bs-toggle="collapse" href="#collapseEnts" role="button"
+                   aria-expanded="false" aria-controls="collapseEnts">
+                    Show recognized entities
+                </a>
 
-                    <div class="collapse" id="collapseEnts">
-                        <div class="card card-body">
-                            {{ displacy_ents | safe }}
-                        </div>
+                <div class="collapse" id="collapseEnts">
+                    <div class="card card-body">
+                        {{ displacy_ents | safe }}
                     </div>
+                </div>
+            {% endif %}
 
-                {% endif %}
-
+            {% if solution %}
                 <div class="text-center">
                     <h2>Solution</h2>
                 </div>
@@ -72,6 +71,8 @@
                     Report incorrectly solved problem
                 </button>
 
+                <a href="/" class="btn btn-primary col-md-4">Go to the main page</a>
+
                 <div class="modal fade" id="modalForIncorrect" tabindex="-1" aria-labelledby="modalForIncorrectLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
@@ -102,6 +103,8 @@
                             data-bs-target="#modalForUnsolved">
                         Report unsolved problem
                     </button>
+
+                    <a href="/" class="btn btn-primary">Go to the main page</a>
                 </div>
 
                 <div class="modal fade" id="modalForUnsolved" tabindex="-1" aria-labelledby="modalForUnsolvedLabel"
