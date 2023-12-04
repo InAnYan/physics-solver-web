@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render
 from physics_solver.exceptions import SolverError, ParseError
-from physics_solver.problem_parser import parse_english_problem
+from physics_solver.parser.problem_parser import parse_english_problem, patterns
 from physics_solver.string_solution import StringSolution
 from spacy import displacy
 
@@ -21,7 +21,7 @@ def solution(request):
         (problem, doc) = parse_english_problem(text)
         solution = problem.solve()
         context['solution'] = StringSolution(problem, solution)
-        context['displacy_ents'] = displacy.render(doc, style='ent')
+        context['displacy_ents'] = displacy.render(doc, style='ent', options={'colors': patterns.generate_colors()})
     except ParseError | SolverError:
         pass
 
