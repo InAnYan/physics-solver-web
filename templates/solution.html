@@ -52,7 +52,7 @@
                                 <p>{{ step }}</p>
                             {% endfor %}
 
-                            <p>Answer: {{ solution.answer }}</p>
+                            <p>Answer: {{ solution.answer }}.</p>
                         </td>
                     </tr>
 
@@ -98,6 +98,17 @@
             {% else %}
                 <div class="alert alert-danger">
                     The program was unable to solve this problem.
+
+                    {% if parse_error %}
+                        <br>
+                        The problem occurred at parsing stage: {{ parse_error }}.
+                    {% endif %}
+
+                    {% if solver_error %}
+                        <br>
+                        The problem occurred at solving stage: {{ solver_error }}.
+                    {% endif %}
+
                     <div class="pt-3"></div>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#modalForUnsolved">
