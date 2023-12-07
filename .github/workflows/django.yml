@@ -27,15 +27,9 @@ jobs:
       with:
         repository: InAnYan/physics_solver
 
-    - name: SHOW LS
-      run: |
-        ls
-
     - name: Install physics_solver
       run: |
-        cd physics_solver
         pip install .
-        cd ..
    
     - name: Run Tests
       run: |
