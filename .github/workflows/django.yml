@@ -26,15 +26,17 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: InAnYan/physics_solver
+        path: lib/
 
     - name: Install physics_solver
       run: |
+        cd lib
         pip install -r requirements.txt
         pip install .
+        cd ..
    
     - name: Run Tests
       run: |
         pwd
         ls
-        ls ..
         python manage.py test
