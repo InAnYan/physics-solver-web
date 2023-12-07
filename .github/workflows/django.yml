@@ -25,7 +25,7 @@ jobs:
     - name: Clone physics_solver
       uses: actions/checkout@master
       with:
-        name: InAnYan/physics_solver
+        repository: InAnYan/physics_solver
 
     - name: SHOW LS
       run: |
