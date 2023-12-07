@@ -29,7 +29,7 @@ jobs:
 
     - name: Install physics_solver
       run: |
-        pip install -r requirements
+        pip install -r requirements.txt
         pip install .
         cd ..
    
