@@ -20,11 +20,16 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-    - name: Install physics_solver lib
+    - uses: actions/checkout@master
+    - name: Clone physics_solver
+      with:
+        name: InAnYan/physics_solver
+        ref: refs/heads/release
+    - name: Install physics_solver
       run: |
-        git clone https://github.com/InAnYan/physics_solver
         cd physics_solver
         pip install .
+        cd ..
     - name: Run Tests
       run: |
         python manage.py test
