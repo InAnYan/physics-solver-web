@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from django.shortcuts import render
-from physics_solver.exceptions import SolverError, ParseError
+from physics_solver.output.string_solution import StringSolution
 from physics_solver.parser.nlp import patterns
 from physics_solver.parser.problem_parser import *
-from physics_solver.string_solution import StringSolution
+from physics_solver.util.exceptions import SolverError
 from spacy import displacy
 
 from physics.models import Example, ImprovementReport, ProblemIssueReport
@@ -56,3 +56,7 @@ def thanks_report(request):
     report.save()
 
     return render(request, 'thanks-report.html')
+
+
+def no_link(request):
+    return render(request, 'no-link.html')
