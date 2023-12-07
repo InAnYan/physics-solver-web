@@ -1,10 +1,6 @@
 from django.db import models
 
 
-class Example(models.Model):
-    text = models.TextField()
-
-
 class ProblemIssueReport(models.Model):
     is_solved = models.BooleanField()
     problem_text = models.TextField()

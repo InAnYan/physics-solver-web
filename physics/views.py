@@ -7,11 +7,11 @@ from physics_solver.parser.problem_parser import *
 from physics_solver.util.exceptions import SolverError
 from spacy import displacy
 
-from physics.models import Example, ImprovementReport, ProblemIssueReport
+from physics.models import ImprovementReport, ProblemIssueReport
 
 
 def index(request):
-    return render(request, 'index.html', {'examples': Example.objects.all()})
+    return render(request, 'index.html')
 
 
 def solution(request):
