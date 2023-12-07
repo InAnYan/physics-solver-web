@@ -27,6 +27,10 @@ jobs:
       with:
         name: InAnYan/physics_solver
 
+    - name: SHOW LS
+      run: |
+        ls
+
     - name: Install physics_solver
       run: |
         cd physics_solver
