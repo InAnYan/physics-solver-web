@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.shortcuts import render
-from physics_solver.output.string_solution import StringSolution
 from physics_solver.parser.nlp import patterns
 from physics_solver.parser.problem_parser import *
 from physics_solver.util.exceptions import SolverError
@@ -24,8 +23,7 @@ def solution(request):
 
     try:
         problem = parse_english_document(doc)
-        solution = problem.solve()
-        context['solution'] = StringSolution(problem, solution)
+        context['solution'] = problem.solve_and_make_string_solution()
     except ParseError as e:
         context['parse_error'] = e.msg
     except SolverError as e:

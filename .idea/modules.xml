@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../physics_solver/.idea/physics_solver.iml" filepath="$PROJECT_DIR$/../physics_solver/.idea/physics_solver.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/physics_solver_web.iml" filepath="$PROJECT_DIR$/.idea/physics_solver_web.iml" />
     </modules>
   </component>
