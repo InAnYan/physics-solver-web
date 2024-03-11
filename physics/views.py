@@ -25,7 +25,7 @@ def solution(request):
         doc, style="ent", options={"colors": patterns.generate_colors()}
     )
     context["displacy_ents_bw"] = re.sub(
-        r"background:[^;];",
+        r"background:[^;]+;",
         "border-style: solid; border-color: black; background-color: white;",
         context["displacy_ents"],
     )
