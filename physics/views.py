@@ -8,53 +8,66 @@ from spacy import displacy
 
 from physics.models import ImprovementReport, ProblemIssueReport
 
+import re
+
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, "index.html")
 
 
 def solution(request):
-    text = request.GET.get('text')
+    text = request.GET.get("text")
 
-    context = {'problem_text': text}
+    context = {"problem_text": text}
 
     doc = recognize_entities(text)
-    context['displacy_ents'] = displacy.render(doc, style='ent', options={'colors': patterns.generate_colors()})
+    context["displacy_ents"] = displacy.render(
+        doc, style="ent", options={"colors": patterns.generate_colors()}
+    )
+    context["displacy_ents_bw"] = re.sub(
+        r"background:[^;];",
+        "border-style: solid; border-color: black; background-color: white;",
+        context["displacy_ents"],
+    )
 
     try:
         problem = parse_english_document(doc)
-        context['solution'] = problem.solve_and_make_string_solution()
+        context["solution"] = problem.solve_and_make_string_solution()
     except ParseError as e:
-        context['parse_error'] = e.msg
+        context["parse_error"] = e.msg
     except SolverError as e:
-        context['solver_error'] = e.msg
+        context["solver_error"] = e.msg
 
-    return render(request, 'solution.html', context)
+    return render(request, "solution.html", context)
 
 
 def thanks_feedback(request):
-    report = ImprovementReport(author_name=request.POST.get('author_name'),
-                               author_email=request.POST.get('author_email'),
-                               text=request.POST.get('text'),
-                               date=datetime.now())
+    report = ImprovementReport(
+        author_name=request.POST.get("author_name"),
+        author_email=request.POST.get("author_email"),
+        text=request.POST.get("text"),
+        date=datetime.now(),
+    )
     report.save()
 
-    return render(request, 'thanks-feedback.html')
+    return render(request, "thanks-feedback.html")
 
 
 def thanks_report(request):
-    problem_text = request.POST.get('text')
+    problem_text = request.POST.get("text")
     if not problem_text:
-        problem_text = ''
+        problem_text = ""
 
-    report = ProblemIssueReport(is_solved=request.POST.get('action') == 'incorrect',
-                                problem_text=problem_text,
-                                comment=request.POST.get('comment'),
-                                date=datetime.now())
+    report = ProblemIssueReport(
+        is_solved=request.POST.get("action") == "incorrect",
+        problem_text=problem_text,
+        comment=request.POST.get("comment"),
+        date=datetime.now(),
+    )
     report.save()
 
-    return render(request, 'thanks-report.html')
+    return render(request, "thanks-report.html")
 
 
 def no_link(request):
-    return render(request, 'no-link.html')
+    return render(request, "no-link.html")
