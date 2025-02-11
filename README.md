@@ -32,7 +32,11 @@ python manage.py runserver
 
 ## How this Project is Implemented
 
-Tech stack: Django.
+Tech stack:
+
+- Django
+- HTML, CSS, JS
+- Bootstrap
 
 To see core library (AI system) stack and implementation, go to <https://github.com/InAnYan/physics-solver>.
 
